@@ -1,0 +1,7 @@
+CompileFlags:
+  Add: [-std=c++23, -fprebuilt-module-path=pcm]
+  Compiler: /usr/bin/clang++
+
+Diagnostics:
+  Suppress: [module_not_found, mismatched_owning_module]
+  UnusedIncludes: None
