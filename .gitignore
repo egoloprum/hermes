@@ -1,1 +1,7 @@
 /plan
+
+main.cpp
+*.prompt.md
+**/prompt
+plan.md
+dependency.md
