@@ -1,6 +1,6 @@
 #pragma once
 
-#include "exception.hpp"
+#include "lib/exception-base.hpp"
 #include <string>
 #include <string_view>
 #include <source_location>

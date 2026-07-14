@@ -1,5 +1,3 @@
-module;
+#include "lib/exception-base.hpp"
 
-export module Hermes.Common.Exceptions;
-
-export class ExceptionNetwork {};
+class NetworkException : public FrameworkException {};
