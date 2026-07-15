@@ -26,15 +26,17 @@ bool ValidationException::hasMultipleErrors() const noexcept { return m_errors.s
 std::string ValidationException::formatMessage(const ValidationErrors& errors) noexcept {
   if (errors.empty()) { return "Validation failed with no specific sub-errors reported."; }
   try {
+    const auto& [fieldName, path, detailedMessage] = errors.front();
+
     if (errors.size() == 1) {
       return std::format(
         "Validation failed: Field '{}' at path '{}' - {}", 
-        errors[0].fieldName, errors[0].path, errors[0].detailedMessage
+        fieldName, path, detailedMessage
       );
     }
     return std::format(
       "Validation failed with {} structural errors. Root cause: '{}' - {}", 
-      errors.size(), errors[0].path, errors[0].detailedMessage
+      errors.size(), path, detailedMessage
     );
   } catch (...) {
     return "ValidationException: diagnostic generation exhausted heap space.";
