@@ -30,7 +30,7 @@ private:
   std::string m_expected;
   std::string m_actual;
 
-  static std::string formatInvalidArgument(
+  static std::string formatMessage(
     const std::string& paramName,
     const std::string& expected,
     const std::string& actual,

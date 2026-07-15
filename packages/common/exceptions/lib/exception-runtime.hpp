@@ -32,6 +32,5 @@ public:
 
 private:
   Subsystem m_subsystem{Subsystem::Unknown};
-  
-  static std::string prefixSubsystem(Subsystem subsystem, const std::string& message) noexcept;
+  static std::string formatMessage(Subsystem subsystem, const std::string& message) noexcept;
 };

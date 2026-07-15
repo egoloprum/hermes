@@ -4,36 +4,24 @@
 
 InvalidArgumentException::InvalidArgumentException(
   std::string paramName,
-  std::string expectedDescription,
-  std::string actualDescription,
+  std::string expected,
+  std::string actual,
   std::string detailedMessage,
   std::source_location location) noexcept
   : FrameworkException(
-      formatInvalidArgument(paramName, expectedDescription, actualDescription, detailedMessage), 
+      formatMessage(paramName, expected, actual, detailedMessage), 
       location
     ),
-  m_paramName(std::move(paramName)),
-  m_expected(std::move(expectedDescription)),
-  m_actual(std::move(actualDescription))
-{
-  addMetadata("validation.parameter_name", m_paramName);
-  addMetadata("validation.expected_state", m_expected);
-  addMetadata("validation.actual_state", m_actual);
-}
+    m_paramName(std::move(paramName)),
+    m_expected(std::move(expected)),
+    m_actual(std::move(actual))
+{}
 
-std::string_view InvalidArgumentException::parameterName() const noexcept {
-  return m_paramName;
-}
+std::string_view InvalidArgumentException::parameterName()        const noexcept { return m_paramName; }
+std::string_view InvalidArgumentException::expectedDescription()  const noexcept { return m_expected; }
+std::string_view InvalidArgumentException::actualDescription()    const noexcept { return m_actual; }
 
-std::string_view InvalidArgumentException::expectedDescription() const noexcept {
-  return m_expected;
-}
-
-std::string_view InvalidArgumentException::actualDescription() const noexcept {
-  return m_actual;
-}
-
-std::string InvalidArgumentException::formatInvalidArgument(
+std::string InvalidArgumentException::formatMessage(
   const std::string& paramName,
   const std::string& expected,
   const std::string& actual,

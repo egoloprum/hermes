@@ -36,10 +36,6 @@ public:
   [[nodiscard]] Timestamp           timestamp() const noexcept;
   [[nodiscard]] bool                hasInnerException() const noexcept;
   [[nodiscard]] std::exception_ptr  innerException() const noexcept;
-  [[nodiscard]] const MetadataMap&  metadata() const noexcept;
-
-protected:
-  void addMetadata(std::string key, std::any value);
 
 private:
   struct Implementation {
@@ -47,7 +43,6 @@ private:
     std::source_location  location;
     Timestamp             timestamp;
     std::exception_ptr    innerException;
-    MetadataMap           metadata;
     std::string           formattedWhat;
   };
 

@@ -6,16 +6,13 @@ FrameworkException::FrameworkException(std::string message, std::source_location
   try {
     auto formatted = formatWhat(message, location);
     m_implementation = std::make_shared<const Implementation>(Implementation{
-      .message = std::move(message),
-      .location = location,
-      .timestamp = std::chrono::system_clock::now(),
+      .message        = std::move(message),
+      .location       = location,
+      .timestamp      = std::chrono::system_clock::now(),
       .innerException = nullptr,
-      .metadata = {},
-      .formattedWhat = std::move(formatted)
+      .formattedWhat  = std::move(formatted)
     });
-  } catch (...) {
-    m_implementation = nullptr;
-  }
+  } catch (...) { m_implementation = nullptr; }
 }
 
 FrameworkException::FrameworkException(std::string message, 
@@ -24,16 +21,13 @@ FrameworkException::FrameworkException(std::string message,
   try {
     auto formatted = formatWhat(message, location);
     m_implementation = std::make_shared<const Implementation>(Implementation{
-      .message = std::move(message),
-      .location = location,
-      .timestamp = std::chrono::system_clock::now(),
+      .message        = std::move(message),
+      .location       = location,
+      .timestamp      = std::chrono::system_clock::now(),
       .innerException = std::move(innerException),
-      .metadata = {},
-      .formattedWhat = std::move(formatted)
+      .formattedWhat  = std::move(formatted)
     });
-  } catch (...) {
-    m_implementation = nullptr;
-  }
+  } catch (...) { m_implementation = nullptr; }
 }
 
 FrameworkException::FrameworkException(const FrameworkException& other) noexcept 
@@ -77,19 +71,6 @@ bool FrameworkException::hasInnerException() const noexcept {
 
 std::exception_ptr FrameworkException::innerException() const noexcept {
   return m_implementation ? m_implementation->innerException : nullptr;
-}
-
-const FrameworkException::MetadataMap& FrameworkException::metadata() const noexcept {
-  static const MetadataMap emptyMap;
-  return m_implementation ? m_implementation->metadata : emptyMap;
-}
-
-void FrameworkException::addMetadata(std::string key, std::any value) {
-  if (!m_implementation) return;
-  
-  auto* mutableImpl = const_cast<Implementation*>(m_implementation.get());
-  try { mutableImpl->metadata[std::move(key)] = std::move(value); } 
-  catch (...) {} // Enforce strong FrameworkException safety; drop metadata rather than throwing
 }
 
 std::string FrameworkException::formatWhat(const std::string& message, const std::source_location& location) noexcept {
