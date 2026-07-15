@@ -25,6 +25,14 @@ public:
     std::string           detailedMessage = "",
     std::source_location  location = std::source_location::current()) noexcept;
 
+  explicit NetworkException(
+    std::error_code       errorCode,
+    std::string           operationName,
+    SubsystemType         subsystemType = SubsystemType::Network,
+    std::string           detailedMessage = "",
+    std::exception_ptr    innerException = nullptr,
+    std::source_location  location = std::source_location::current()) noexcept;
+
   ~NetworkException() noexcept override = default;
 
   NetworkException(const NetworkException& other)             noexcept = default;

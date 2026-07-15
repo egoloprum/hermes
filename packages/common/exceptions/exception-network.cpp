@@ -35,6 +35,23 @@ NetworkException::NetworkException(
 {}
 
 NetworkException::NetworkException(
+  std::error_code      errorCode,
+  std::string          operationName,
+  SubsystemType        subsystemType,
+  std::string          detailedMessage,
+  std::exception_ptr   innerException,
+  std::source_location location) noexcept
+  : FrameworkException(
+    formatMessage(errorCode, operationName, detailedMessage), 
+    std::move(innerException), 
+    location
+  ),
+    m_errorCode(errorCode),
+    m_operationName(std::move(operationName)),
+    m_subsystemType(subsystemType)
+{}
+
+NetworkException::NetworkException(
   std::string          detailedMessage,
   SubsystemType        subsystemType,
   std::source_location location) noexcept
