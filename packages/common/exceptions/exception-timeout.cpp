@@ -27,13 +27,6 @@ TimeoutException::TimeoutException(
     m_actualElapsed(actualElapsed)
 {}
 
-TimeoutException::~TimeoutException() noexcept = default;
-
-TimeoutException::TimeoutException(const TimeoutException& other)             noexcept = default;
-TimeoutException& TimeoutException::operator=(const TimeoutException& other)  noexcept = default;
-TimeoutException::TimeoutException(TimeoutException&& other)                  noexcept = default;
-TimeoutException& TimeoutException::operator=(TimeoutException&& other)       noexcept = default;
-
 TimeoutType TimeoutException::timeoutType() const noexcept { return m_type; }
 std::string_view TimeoutException::timeoutTypeName() const noexcept { return to_string(m_type); }
 std::string_view TimeoutException::operationName() const noexcept { return m_operationName; }

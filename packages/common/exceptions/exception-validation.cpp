@@ -20,15 +20,7 @@ ValidationException::ValidationException(
   } catch (...) {}
 }
 
-ValidationException::~ValidationException() noexcept = default;
-
-ValidationException::ValidationException(const ValidationException& other)            noexcept = default;
-ValidationException& ValidationException::operator=(const ValidationException& other) noexcept = default;
-ValidationException::ValidationException(ValidationException&& other)                 noexcept = default;
-ValidationException& ValidationException::operator=(ValidationException&& other)      noexcept = default;
-
 const ValidationException::ValidationErrors& ValidationException::errors() const noexcept { return m_errors; }
-
 bool ValidationException::hasMultipleErrors() const noexcept { return m_errors.size() > 1; }
 
 std::string ValidationException::formatSummary(const ValidationErrors& errors) noexcept {

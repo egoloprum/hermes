@@ -5,6 +5,7 @@
 #include <format>
 #include "../enums/subsystem.hpp"
 #include "../enums/timeout.hpp"
+#include "../enums/errors.hpp"
 
 [[nodiscard]] constexpr std::string_view to_string(SubsystemType subsystemType) noexcept {
   switch (subsystemType) {
@@ -17,7 +18,7 @@
     case SubsystemType::Security:      return "Security";
     case SubsystemType::Network:       return "Network";
     case SubsystemType::Unknown:
-    default:                       return "Unknown";
+    default:                           return "Unknown";
   }
 }
 
@@ -33,8 +34,21 @@
   case TimeoutType::KeepAlive:         return "KeepAlive";
   case TimeoutType::ConnectionPool:    return "ConnectionPool";
   case TimeoutType::Gateway:           return "Gateway";
-  case TimeoutType::DistributedLock:    return "DistributedLock";
+  case TimeoutType::DistributedLock:   return "DistributedLock";
   case TimeoutType::Unknown:
   default:                             return "Unknown";
+  }
+}
+
+[[nodiscard]] constexpr std::string_view to_string(ConfigurationErrorType type) noexcept {
+  switch (type) {
+    case ConfigurationErrorType::FileNotFound:          return "FileNotFound";
+    case ConfigurationErrorType::SyntaxError:           return "SyntaxError";
+    case ConfigurationErrorType::MissingSection:        return "MissingSection";
+    case ConfigurationErrorType::UnsupportedProvider:   return "UnsupportedProvider";
+    case ConfigurationErrorType::ValueConversionFailed: return "ValueConversionFailed";
+    case ConfigurationErrorType::SchemaValidationError: return "SchemaValidationError";
+    case ConfigurationErrorType::Unknown:
+    default:                                            return "Unknown";
   }
 }

@@ -28,12 +28,12 @@ public:
     std::source_location location = std::source_location::current()
   ) noexcept;
 
-  ~ValidationException() noexcept override;
+  ~ValidationException() noexcept override = default;
 
-  ValidationException(const ValidationException& other)             noexcept;
-  ValidationException& operator=(const ValidationException& other)  noexcept;
-  ValidationException(ValidationException&& other)                  noexcept;
-  ValidationException& operator=(ValidationException&& other)       noexcept;
+  ValidationException(const ValidationException& other)             noexcept = default;
+  ValidationException& operator=(const ValidationException& other)  noexcept = default;
+  ValidationException(ValidationException&& other)                  noexcept = default;
+  ValidationException& operator=(ValidationException&& other)       noexcept = default;
 
   // Provides inspection capabilities for downstream formatters, JSON converters, or DTO boundary maps
   [[nodiscard]] const ValidationErrors& errors() const noexcept;

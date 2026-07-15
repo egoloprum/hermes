@@ -21,12 +21,12 @@ public:
     std::source_location  location = std::source_location::current()
   ) noexcept;
 
-  ~TimeoutException() noexcept override;
+  ~TimeoutException() noexcept override = default;
 
-  TimeoutException(const TimeoutException& other)             noexcept;
-  TimeoutException& operator=(const TimeoutException& other)  noexcept;
-  TimeoutException(TimeoutException&& other)                  noexcept;
-  TimeoutException& operator=(TimeoutException&& other)       noexcept;
+  TimeoutException(const TimeoutException& other)             noexcept = default;
+  TimeoutException& operator=(const TimeoutException& other)  noexcept = default;
+  TimeoutException(TimeoutException&& other)                  noexcept = default;
+  TimeoutException& operator=(TimeoutException&& other)       noexcept = default;
 
   [[nodiscard]] TimeoutType       timeoutType() const noexcept;
   [[nodiscard]] std::string_view  timeoutTypeName() const noexcept;
