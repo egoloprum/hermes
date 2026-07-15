@@ -2,30 +2,35 @@
 #include <format>
 #include <utility>
 
-FrameworkException::FrameworkException(std::string message, std::source_location location) noexcept {
+FrameworkException::FrameworkException(
+  std::string message, 
+  std::source_location location
+) noexcept {
   try {
     auto formatted = formatWhat(message, location);
     m_implementation = std::make_shared<const Implementation>(Implementation{
-      .message        = std::move(message),
-      .location       = location,
-      .timestamp      = std::chrono::system_clock::now(),
-      .innerException = nullptr,
-      .formattedWhat  = std::move(formatted)
+      .message          = std::move(message),
+      .location         = location,
+      .timestamp        = std::chrono::system_clock::now(),
+      .innerException   = nullptr,
+      .formattedWhat    = std::move(formatted)
     });
   } catch (...) { m_implementation = nullptr; }
 }
 
-FrameworkException::FrameworkException(std::string message, 
-                                       std::exception_ptr innerException, 
-                                       std::source_location location) noexcept {
+FrameworkException::FrameworkException(
+  std::string message, 
+  std::exception_ptr innerException, 
+  std::source_location location
+) noexcept {
   try {
     auto formatted = formatWhat(message, location);
     m_implementation = std::make_shared<const Implementation>(Implementation{
-      .message        = std::move(message),
-      .location       = location,
-      .timestamp      = std::chrono::system_clock::now(),
-      .innerException = std::move(innerException),
-      .formattedWhat  = std::move(formatted)
+      .message          = std::move(message),
+      .location         = location,
+      .timestamp        = std::chrono::system_clock::now(),
+      .innerException   = std::move(innerException),
+      .formattedWhat    = std::move(formatted)
     });
   } catch (...) { m_implementation = nullptr; }
 }
@@ -82,7 +87,6 @@ std::string FrameworkException::formatWhat(const std::string& message, const std
       location.function_name(), 
       message
     );
-  } catch (...) { 
-    return message; 
-  }
+  } 
+  catch (...) { return message; }
 }

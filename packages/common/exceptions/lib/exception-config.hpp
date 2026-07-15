@@ -35,11 +35,11 @@ public:
   ConfigurationException(ConfigurationException&& other)                  noexcept = default;
   ConfigurationException& operator=(ConfigurationException&& other)       noexcept = default;
 
-  [[nodiscard]] inline ConfigurationErrorType   errorType() const noexcept; 
-  [[nodiscard]] inline std::string_view         errorTypeName() const noexcept; 
-  [[nodiscard]] inline std::string_view         providerName() const noexcept;
-  [[nodiscard]] inline std::string_view         configSource() const noexcept; 
-  [[nodiscard]] inline std::string_view         keyPath() const noexcept;
+  [[nodiscard]] ConfigurationErrorType   errorType() const noexcept; 
+  [[nodiscard]] std::string_view         errorTypeName() const noexcept; 
+  [[nodiscard]] std::string_view         providerName() const noexcept;
+  [[nodiscard]] std::string_view         configSource() const noexcept; 
+  [[nodiscard]] std::string_view         keyPath() const noexcept;
 
 private:
   ConfigurationErrorType  m_type{ConfigurationErrorType::Unknown};
@@ -52,7 +52,6 @@ private:
     std::string_view        provider,
     std::string_view        source,
     std::string_view        keyPath,
-    std::string_view        message
-  ) noexcept;
+    std::string_view        detailedMessage) noexcept;
 };
 

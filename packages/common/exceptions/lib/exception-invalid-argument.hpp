@@ -34,6 +34,5 @@ private:
     const std::string& paramName,
     const std::string& expected,
     const std::string& actual,
-    const std::string& detailedMessage
-  ) noexcept;
+    const std::string& detailedMessage) noexcept;
 };

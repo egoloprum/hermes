@@ -59,8 +59,8 @@ std::string ConfigurationException::formatMessage(
   std::string_view provider,
   std::string_view source,
   std::string_view keyPath,
-  std::string_view detailedMessage) noexcept 
-{
+  std::string_view detailedMessage
+) noexcept {
   try {
     if (!keyPath.empty()) {
       return std::format(

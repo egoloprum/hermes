@@ -10,15 +10,15 @@
 class RuntimeException : public FrameworkException {
 public:
   explicit RuntimeException(
-    SubsystemType subsystemType,
-    std::string message,
-    std::source_location location = std::source_location::current()) noexcept;
+    SubsystemType         subsystemType,
+    std::string           detailedMessage = "",
+    std::source_location  location = std::source_location::current()) noexcept;
 
   RuntimeException(
-    SubsystemType subsystemType,
-    std::string message,
-    std::exception_ptr innerException,
-    std::source_location location = std::source_location::current()) noexcept;
+    SubsystemType         subsystemType,
+    std::string           detailedMessage,
+    std::exception_ptr    innerException,
+    std::source_location  location = std::source_location::current()) noexcept;
 
   ~RuntimeException() noexcept override = default;
 
@@ -31,6 +31,9 @@ public:
   [[nodiscard]] std::string_view    subsystemName() const noexcept;
 
 private:
-  SubsystemType       m_subsystemType{SubsystemType::Unknown};
-  static std::string  formatMessage(SubsystemType subsystemType, const std::string& message) noexcept;
+  SubsystemType m_subsystemType{SubsystemType::Unknown};
+
+  static std::string formatMessage(
+    SubsystemType       subsystemType, 
+    const std::string&  detailedMessage) noexcept;
 };

@@ -36,16 +36,15 @@ public:
   [[nodiscard]] Duration          actualElapsed() const noexcept;
 
 private:
-  static std::string formatMessage(
-      TimeoutType       type,
-      std::string_view  operation,
-      Duration          configured,
-      Duration          elapsed
-    ) noexcept;
-
   TimeoutType   m_type{TimeoutType::Unknown};
   std::string   m_operationName;
   SubsystemType m_subsystemName{SubsystemType::Network};
   Duration      m_configuredTimeout{0};
   Duration      m_actualElapsed{0};
+
+  static std::string formatMessage(
+    TimeoutType       type,
+    std::string_view  operation,
+    Duration          configured,
+    Duration          elapsed) noexcept;
 };

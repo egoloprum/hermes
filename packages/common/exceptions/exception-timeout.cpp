@@ -27,19 +27,19 @@ TimeoutException::TimeoutException(
     m_actualElapsed(actualElapsed)
 {}
 
-TimeoutType TimeoutException::timeoutType() const noexcept { return m_type; }
-std::string_view TimeoutException::timeoutTypeName() const noexcept { return to_string(m_type); }
-std::string_view TimeoutException::operationName() const noexcept { return m_operationName; }
-std::string_view TimeoutException::subsystemName() const noexcept { return to_string(m_subsystemName); }
-TimeoutException::Duration TimeoutException::configuredTimeout() const noexcept { return m_configuredTimeout; }
-TimeoutException::Duration TimeoutException::actualElapsed() const noexcept { return m_actualElapsed; }
+TimeoutType                 TimeoutException::timeoutType() const noexcept { return m_type; }
+std::string_view            TimeoutException::timeoutTypeName() const noexcept { return to_string(m_type); }
+std::string_view            TimeoutException::operationName() const noexcept { return m_operationName; }
+std::string_view            TimeoutException::subsystemName() const noexcept { return to_string(m_subsystemName); }
+TimeoutException::Duration  TimeoutException::configuredTimeout() const noexcept { return m_configuredTimeout; }
+TimeoutException::Duration  TimeoutException::actualElapsed() const noexcept { return m_actualElapsed; }
 
 std::string TimeoutException::formatMessage(
   TimeoutType type,
   std::string_view operation,
   Duration configured,
-  Duration elapsed) noexcept 
-{
+  Duration elapsed
+) noexcept {
   try {
     double confMs = static_cast<double>(configured.count()) / 1000.0;
     double elapMs = static_cast<double>(elapsed.count()) / 1000.0;

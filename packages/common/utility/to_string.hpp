@@ -6,6 +6,7 @@
 #include "../enums/subsystem.hpp"
 #include "../enums/timeout.hpp"
 #include "../enums/errors.hpp"
+#include "../enums/connection.hpp"
 
 [[nodiscard]] constexpr std::string_view to_string(SubsystemType subsystemType) noexcept {
   switch (subsystemType) {
@@ -50,5 +51,16 @@
     case ConfigurationErrorType::SchemaValidationError: return "SchemaValidationError";
     case ConfigurationErrorType::Unknown:
     default:                                            return "Unknown";
+  }
+}
+
+[[nodiscard]] constexpr std::string_view to_string(ConnectionState state) noexcept {
+  switch (state) {
+    case ConnectionState::Disconnected:   return "Disconnected";
+    case ConnectionState::Connecting:     return "Connecting";
+    case ConnectionState::Connected:      return "Connected";
+    case ConnectionState::Disconnecting:  return "Disconnecting";
+    case ConnectionState::Faulted:        return "Faulted";
+    default:                              return "Unknown";
   }
 }
