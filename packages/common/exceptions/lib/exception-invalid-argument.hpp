@@ -8,11 +8,11 @@
 class InvalidArgumentException : public FrameworkException {
 public:
   explicit InvalidArgumentException(
-    std::string paramName,
-    std::string expectedDescription,
-    std::string actualDescription,
-    std::string detailedMessage = "",
-    std::source_location location = std::source_location::current()) noexcept;
+    std::string           paramName,
+    std::string           expectedDescription,
+    std::string           actualDescription,
+    std::string           detailedMessage = "",
+    std::source_location  location = std::source_location::current()) noexcept;
 
   ~InvalidArgumentException() noexcept override = default;
 
@@ -21,9 +21,9 @@ public:
   InvalidArgumentException(InvalidArgumentException&& other)                  noexcept = default;
   InvalidArgumentException& operator=(InvalidArgumentException&& other)       noexcept = default;
 
-  [[nodiscard]] std::string_view parameterName() const noexcept;
-  [[nodiscard]] std::string_view expectedDescription() const noexcept;
-  [[nodiscard]] std::string_view actualDescription() const noexcept;
+  [[nodiscard]] std::string_view parameterName()        const noexcept;
+  [[nodiscard]] std::string_view expectedDescription()  const noexcept;
+  [[nodiscard]] std::string_view actualDescription()    const noexcept;
 
 private:
   std::string m_paramName;
@@ -34,5 +34,6 @@ private:
     const std::string& paramName,
     const std::string& expected,
     const std::string& actual,
-    const std::string& detailedMessage) noexcept;
+    const std::string& detailedMessage
+  ) noexcept;
 };
